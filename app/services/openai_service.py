@@ -10,7 +10,7 @@ openai_client = AsyncOpenAI(api_key=api_key)
 async def get_ai_feedback(summary: dict) -> str:
     prompt = f"다음은 감정 데이터 요약입니다. 분석해 주세요: \n{summary}"
     response = await openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}]
     )
     
