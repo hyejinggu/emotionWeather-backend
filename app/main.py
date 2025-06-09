@@ -1,8 +1,10 @@
 from fastapi import FastAPI
-from app.db.session import get_db
+from app.api import emotion 
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
     return {"message": "Hello, FastAPI!"}
+
+app.include_router(emotion.router)
