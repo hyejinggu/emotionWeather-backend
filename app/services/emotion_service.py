@@ -1,7 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy.future import select, func
 from app.models.emotion_entry import EmotionEntry
 from app.schemas.emotion_entry import EmotionEntryCreate
+from typing import List, Dict
+from datetime import datetime
+from collections import defaultdict
 import uuid
 
 
@@ -24,3 +27,40 @@ async def create_emotion_entry(
     await db.refresh(new_entry)  # 생성된 객체를 다시 읽어옴 (id 등 포함)
 
     return new_entry
+
+
+async def get_emotion_summary_by_session(
+    db: AsyncSession,
+    user_session_id: str,
+    time_type: str
+) -> Dict[str, int]:
+    result = await db.execute(
+        select(EmotionEntry.emotion, func.count())
+        .where(
+            EmotionEntry.user_session_id == user_session_id,
+            EmotionEntry.time_type == time_type
+        )
+        .group_by(EmotionEntry.emotion)
+    )
+    return {emotion: count for emotion, count in result.all()}
+
+
+async def summarize_emotion_by_time(
+    db: AsyncSession,
+    user_session_id: str,
+    time_type: str
+) -> Dict[str, Dict[str, int]]:
+    result = await db.execute(
+        select(EmotionEntry.timestamp, EmotionEntry.emotion)
+        .where(
+            EmotionEntry.user_session_id == user_session_id,
+            EmotionEntry.time_type == time_type
+        )
+    )
+    
+    summary = defaultdict(lambda: defaultdict(int))
+    for timestamp, emotion in result.all():
+        hour_str = timestamp.strftime("%Y-%m-%d %H:00")
+        summary[hour_str][emotion] += 1
+        
+    return summary

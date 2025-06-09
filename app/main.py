@@ -3,6 +3,7 @@ from app.api import emotion
 
 app = FastAPI()
 
+# 서버 실행: uvicorn app.main:app --reload
 @app.get("/")
 def read_root():
     return {"message": "Hello, FastAPI!"}
