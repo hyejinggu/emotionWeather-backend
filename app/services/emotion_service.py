@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select, func
+from sqlalchemy import select, func
 from app.models.emotion_entry import EmotionEntry
 from app.schemas.emotion_entry import EmotionEntryCreate
 from typing import List, Dict
