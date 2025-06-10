@@ -1,4 +1,7 @@
-# Emotion Weather (감정 날씨 프로젝트) ☁️😊
+# Emotion Weather ☁️😊
+
+**Emotion Weather** is an interactive emotion tracking project that collects user sentiment through QR code sharing.  
+By leveraging AI, it analyzes collective emotional trends using weather metaphors — offering engaging and meaningful emotional feedback and visualizations.
 
 사용자들이 공유한 QR 링크를 통해 감정 데이터를 수집하고, <br>
 AI 기반 분석 시스템이 기상 용어를 활용하여 감정 상태를 체계적이고 흥미롭게 해석 및 예측합니다. <br>
@@ -8,11 +11,11 @@ AI 기반 분석 시스템이 기상 용어를 활용하여 감정 상태를 체
 
 ## 🌟 Features
 
-- QR 생성 및 링크 공유 기능
-- 감정 입력 (현재 / 몇 시간 후) 인터페이스
-- 감정 데이터를 PostgreSQL에 저장
-- OpenAI API를 활용한 감정 피드백 생성
-- 같은 QR 그룹 사용자들의 감정을 기반으로 결과 요약 및 시각화
+- Generate QR codes for group sharing
+- Input your current or future emotional state (via emoji)
+- Store all emotion data in PostgreSQL
+- Generate warm, empathetic feedback using the OpenAI API
+- Summarize and visualize group-wide emotional trends
 
 ---
 
@@ -22,37 +25,37 @@ AI 기반 분석 시스템이 기상 용어를 활용하여 감정 상태를 체
 - **Frontend**: JavaScript (Vanilla JS or React)
 - **Database**: PostgreSQL
 - **AI**: OpenAI API (GPT)
-- **Deployment (예정)**: Railway / Vercel / Render 등
+- **Deployment (Planned)**: Railway / Vercel / Render 등
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. 클론 및 폴더 이동
+### 1. Clone the repo
 ```bash
 git clone https://github.com/hyejinggu/emotion-weather.git
 cd emotion-weather
 ```
 
-### 2. 가상 환경 생성 및 활성화
+### 2. Set up a virtual environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. 패키지 설치
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. 서버 실행
+### 4. Start the development server
 ```bash
 uvicorn main:app --reload
 ```
 
 ---
 
-## 📘 API 문서
+## 📘 API Docs
 
 - Swagger: [http://localhost:8000/docs](http://localhost:8000/docs)
 - ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
@@ -61,17 +64,18 @@ uvicorn main:app --reload
 
 ## 🗓️ Roadmap / TODO
 
-- [ ] 감정 입력 API 구현
-- [ ] PostgreSQL 연결 및 데이터 저장
-- [ ] QR 코드 기반 그룹 기능
-- [ ] OpenAI API 통신 및 응답 파싱
-- [ ] 결과 요약 페이지 구현
-- [ ] 프로젝트 배포
+- [ ] Build emotion input API
+- [ ] Connect PostgreSQL and persist data
+- [ ] Implement QR-based group management
+- [ ] Integrate OpenAI API and parse responses
+- [ ] Create the group emotion summary page
+- [ ] Deploy the project
 
 
 ---
 
 ## 🙋‍♀️ About
 
-이 프로젝트는 혼자서 진행하는 작은 실험이자,  
-FastAPI와 OpenAI를 활용한 감정 데이터 기반 웹서비스 개발 연습용 프로젝트입니다.
+This is a personal side project and a learning experiment
+to explore how FastAPI and OpenAI can be combined to create
+a meaningful, emotion-aware web experience.
