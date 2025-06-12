@@ -1,0 +1,5 @@
+fastapi[all]
+sqlalchemy>=1.4
+asyncpg
+python-dotenv
+openai
