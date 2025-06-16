@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api import emotion 
+from app.api import emotion, qr
 
 app = FastAPI()
 
@@ -9,3 +9,4 @@ def read_root():
     return {"message": "Hello, FastAPI!"}
 
 app.include_router(emotion.router)
+app.include_router(qr.router)

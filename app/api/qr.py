@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from uuid import uuid4
+
 import qrcode
 import io
 import base64
@@ -11,8 +11,8 @@ from app.schemas.qr_group import QRResponse
 
 router = APIRouter()
 
-@router.post("/qr/create-group", response_model = QRResponse)
-async def creqte_qr_group(db: AsyncSession = Depends(get_db)):
+@router.post("/qr/create-group", response_model=QRResponse)
+async def create_qr_group(db: AsyncSession = Depends(get_db)):
     # 1. QR Group 생성 및 저장
     new_group = QRGroup()
     db.add(new_group)
@@ -29,5 +29,5 @@ async def creqte_qr_group(db: AsyncSession = Depends(get_db)):
     return {
         "qr_group_id": str(new_group.id),
         "session_url": session_url,
-        "qr_image_base64": qr_base64
+        "qr_image_base64": qr_base64,
     }
