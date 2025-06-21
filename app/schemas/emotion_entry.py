@@ -17,4 +17,4 @@ class EmotionEntryRead(EmotionEntryCreate):  # 기존 필드 재사용 (상속)
     id: UUID  # 감정 입력의 고유 ID
 
     class Config:
-        orm_mode = True  # SQLAlchemy 모델을 그대로 Pydantic으로 변환 가능하게 함
+        from_attributes = True  # SQLAlchemy 모델을 그대로 Pydantic으로 변환 가능하게 함
