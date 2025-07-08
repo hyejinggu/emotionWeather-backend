@@ -23,10 +23,10 @@ async def submit_emotion(
 
 @router.get("/emotion/summary")
 async def emotion_summary(
-    user_session_id: str,
+    qr_group_id: str,
     db: AsyncSession = Depends(get_db)
 ):
-    summary = await summarize_emotion_by_time(db, user_session_id, "future")
+    summary = await summarize_emotion_by_time(db, qr_group_id, "future")
     feedback = await get_ai_feedback(summary)
     
     return {

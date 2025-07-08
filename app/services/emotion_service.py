@@ -47,13 +47,13 @@ async def get_emotion_summary_by_session(
 
 async def summarize_emotion_by_time(
     db: AsyncSession,
-    user_session_id: str,
+    qr_group_id: str,
     time_type: str
 ) -> Dict[str, Dict[str, int]]:
     result = await db.execute(
         select(EmotionEntry.timestamp, EmotionEntry.emotion)
         .where(
-            EmotionEntry.user_session_id == user_session_id,
+            EmotionEntry.qr_group_id == qr_group_id,
             EmotionEntry.time_type == time_type
         )
     )

@@ -11,6 +11,9 @@ class EmotionEntry(Base):
 
     # 어떤 사용자(session)가 작성한 감정인지
     user_session_id = Column(UUID(as_uuid=True), nullable=False)
+    
+    # 어떤 qr group에서 작성된 감정인지
+    qr_group_id = Column(UUID(as_uuid=True), nullable=False)
 
     # 감정 이모지 (예: 😄)
     emotion = Column(TEXT, nullable=False)
