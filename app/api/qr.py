@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy.future import select, update
 
 import qrcode, base64, uuid, io
 
 from app.db.session import get_db
 from app.models.qr_group import QRGroup
-from app.schemas.qr_group import QRResponse
+from app.schemas.qr_group import QRResponse, UpdateQRGroupNameRequest
 
 router = APIRouter()
 
@@ -57,4 +57,24 @@ async def get_group_info(groupId: str, db: AsyncSession = Depends(get_db)):
         "qr_image_base64": str(group.qr_image),
     }
     
-    
+
+@router.put("qr/group-name")
+async def modify_group_name(
+    payload: UpdateQRGroupNameRequest,
+    db: AsyncSession = Depends(get_db)
+):
+    result = await db.execute(
+        update(QRGroup)
+        .where(QRGroup.id == payload.qr_group_id)
+        .values(group_name=payload.group_name)
+        .returning(QRGroup.group_name)
+    )
+    await db.commit()
+
+    updated_name = result.scalar()
+    if not updated_name:
+        raise HTTPException(status_code=404, detail="QR 그룹을 찾을 수 없습니다.")
+
+    return {
+        "updated_group_name": updated_name
+    }

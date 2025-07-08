@@ -16,6 +16,7 @@ async def create_emotion_entry(
     new_entry = EmotionEntry(
         id=uuid.uuid4(),  # 기본키 수동 생성 (DB에서 자동 생성 안 하므로)
         user_session_id=entry.user_session_id,
+        qr_group_id=entry.qr_session_id,
         emotion=entry.emotion,
         time_type=entry.time_type,
         timestamp=entry.timestamp,

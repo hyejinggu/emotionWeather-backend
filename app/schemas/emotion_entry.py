@@ -5,6 +5,7 @@ from uuid import UUID
 
 class EmotionEntryCreate(BaseModel): # 모든 Pydantic 스키마는 이 클래스를 상속
     user_session_id: UUID  # 사용자 세션 ID
+    qr_session_id: UUID
     emotion: str           # 이모지
     time_type: str         # 'current' 또는 'future'
     timestamp: datetime    # 입력 시각
